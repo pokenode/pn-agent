@@ -1,4 +1,4 @@
 github.com/shirou/gopsutil v2.20.9+incompatible h1:msXs2frUV+O/JLva9EDLpuJ84PrFsdCTCQex8PUdtkQ=
 github.com/shirou/gopsutil v2.20.9+incompatible/go.mod h1:5b4v6he4MtMOwMlS0TUMTu2PcXUg8+E1lC7eC3UO/RA=
-golang.org/x/sys v0.0.0-20201004230629-f6757f270073 h1:h6POl/ao7bJKsyalYGo1qALE/khxX70Enx+E/Skq+XE=
-golang.org/x/sys v0.0.0-20201004230629-f6757f270073/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20201007082116-8445cc04cbdf h1:AvBTl0xbF/KtHyvm61X4gSPF7/dKJ/xQqJwKr1Qu9no=
+golang.org/x/sys v0.0.0-20201007082116-8445cc04cbdf/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

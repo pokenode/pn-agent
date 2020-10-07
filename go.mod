@@ -1,8 +1,8 @@
-module github.com/pokenode/pn-agent
+module pokenode.com/pn-agent
 
 go 1.14
 
 require (
 	github.com/shirou/gopsutil v2.20.9+incompatible
-	golang.org/x/sys v0.0.0-20201004230629-f6757f270073 // indirect
+	golang.org/x/sys v0.0.0-20201007082116-8445cc04cbdf // indirect
 )

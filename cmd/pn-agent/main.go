@@ -1,7 +1,7 @@
 package main
 
 import (
-	sys "github.com/pokenode/pn-agent/pkg/system"
+	sys "pokenode.com/pn-agent/pkg/system"
 )
 
 func main() {

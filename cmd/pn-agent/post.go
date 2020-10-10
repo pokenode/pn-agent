@@ -13,13 +13,19 @@ import (
 func SendNodeStats() {
 	stats := sys.GetStats()
 	b, err := json.Marshal(stats)
+	if err != nil {
+		return
+	}
 	req, err := http.NewRequest("POST", API, bytes.NewBuffer(b))
+	if err != nil {
+		return
+	}
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		return
 	}
 	defer resp.Body.Close()
 

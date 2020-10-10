@@ -1,0 +1,14 @@
+[Unit]
+Description=PokeNode Agent Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+User=root
+Environment=TOKEN=PH_TOKEN
+ExecStart=/var/www/pokenode/pn-agent
+
+[Install]
+WantedBy=multi-user.target

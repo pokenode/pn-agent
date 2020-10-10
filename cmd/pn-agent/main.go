@@ -1,18 +1,24 @@
 package main
 
 import (
-	sys "pokenode.com/pn-agent/pkg/system"
+	"github.com/robfig/cron/v3"
 )
 
+func init() {
+	init_env()
+}
+
 func main() {
-	cpu := sys.CPU(0)
-	PPrint(cpu)
-	disk := sys.Disk()
-	PPrint(disk)
-	host := sys.Host()
-	PPrint(host)
-	mem := sys.Mem()
-	PPrint(mem)
-	net := sys.Net()
-	PPrint(net)
+	SendNodeStats()
+
+	// init
+	c := cron.New(cron.WithChain(
+		cron.DelayIfStillRunning(cron.DefaultLogger),
+	))
+
+	// define jobs
+	c.AddFunc("*/5 * * * *", SendNodeStats)
+
+	// run
+	c.Run()
 }

@@ -2,7 +2,6 @@ package system
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/shirou/gopsutil/cpu"
 )
@@ -14,9 +13,9 @@ type CPUStats struct {
 	Percent   float64 `json:"percent"`
 }
 
-func CPU(interval time.Duration) CPUStats {
+func CPU() CPUStats {
 	c, err := cpu.Counts(true)
-	p, err := cpu.Percent(interval, false)
+	p, err := cpu.Percent(0, false)
 	cpuInfo, err := cpu.Info()
 	if err != nil {
 		fmt.Println(err)

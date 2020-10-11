@@ -1,7 +1,6 @@
 package system
 
 import (
-	"encoding/json"
 	"fmt"
 	"sort"
 
@@ -13,8 +12,7 @@ type ProcStats struct {
 	Percent float64 `json:"percent"`
 }
 
-func Proc() string {
-	var str string
+func Proc() []ProcStats {
 	var pList []ProcStats
 
 	procs, err := process.Processes()
@@ -37,10 +35,5 @@ func Proc() string {
 	// Keep top 10
 	pList = pList[:10]
 
-	b, err := json.Marshal(pList)
-	if err != nil {
-		fmt.Println(err)
-	}
-	str = string(b)
-	return str
+	return pList
 }

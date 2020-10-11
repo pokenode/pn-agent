@@ -1,7 +1,6 @@
 package system
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/shirou/gopsutil/host"
@@ -17,8 +16,7 @@ type HostStats struct {
 	VirtSys    string `json:"virt_sys"`
 }
 
-func Host() string {
-	var str string
+func Host() HostStats {
 	hostStats, err := host.Info()
 	if err != nil {
 		fmt.Println(err)
@@ -32,10 +30,5 @@ func Host() string {
 		KernelArch: hostStats.KernelArch,
 		VirtSys:    hostStats.VirtualizationSystem,
 	}
-	b, err := json.Marshal(stats)
-	if err != nil {
-		fmt.Println(err)
-	}
-	str = string(b)
-	return str
+	return stats
 }

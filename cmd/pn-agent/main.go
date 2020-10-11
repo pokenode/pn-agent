@@ -9,7 +9,7 @@ func init() {
 }
 
 func main() {
-	SendNodeStats()
+	//SendNodeStats()
 
 	// init
 	c := cron.New(cron.WithChain(
@@ -18,6 +18,7 @@ func main() {
 
 	// define jobs
 	c.AddFunc("*/5 * * * *", SendNodeStats)
+	//c.AddFunc("@every 6s", SendNodeStats)
 
 	// run
 	c.Run()

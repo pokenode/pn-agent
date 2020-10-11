@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=3
 User=root
-Environment=TOKEN=PN_TOKEN
+Environment=NODEID=PN_NODEID
 ExecStart=/var/www/pokenode/pn-agent
 
 [Install]

@@ -21,6 +21,7 @@ func SendNodeStats() {
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Pokenode-Agent-Nodeid", NODEID)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

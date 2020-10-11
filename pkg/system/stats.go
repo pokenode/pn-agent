@@ -1,20 +1,22 @@
 package system
 
 type Stats struct {
-	Host HostStats
 	CPU  CPUStats
 	Mem  MemStats
 	Disk DiskStats
 	Net  NetStats
+	Host string
+	Proc string
 }
 
 func GetStats() Stats {
 	stats := Stats{
-		Host: Host(),
 		CPU:  CPU(),
 		Mem:  Mem(),
 		Disk: Disk(),
 		Net:  Net(),
+		Host: Host(),
+		Proc: Proc(),
 	}
 	return stats
 }

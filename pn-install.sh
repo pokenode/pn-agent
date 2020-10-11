@@ -15,7 +15,7 @@ if [ ! -d $PN_PATH ]; then
 fi
 
 # Download pn-agent from GitHub
-URL_OF_AGENT=https://github.com/pokenode/pn-agent/releases/download/v0.0.1/pn-agent
+URL_OF_AGENT=https://github.com/pokenode/pn-agent/releases/latest/download/pn-agent
 echo "Downloading pn-agent from GitHub ..."
 curl -s -L -o $PN_AGENT_PATH $URL_OF_AGENT
 if [ $? -ne 0 ] || [ ! -f $PN_AGENT_PATH ]; then

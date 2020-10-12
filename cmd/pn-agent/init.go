@@ -15,7 +15,7 @@ func init_env() {
 	}
 	API = os.Getenv("API")
 	if API == "" {
-		API = "https://api.pokenode.com/stats"
+		API = "http://localhost:4001/stats"
 	}
 	NODEID = os.Getenv("NODEID")
 	if NODEID == "" {

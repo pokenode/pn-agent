@@ -8,6 +8,7 @@ Restart=always
 RestartSec=3
 User=root
 Environment=MODE=PROD
+Environment=API=PN_API
 Environment=NODEID=PN_NODEID
 ExecStart=/var/www/pokenode/pn-agent
 

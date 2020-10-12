@@ -14,10 +14,12 @@ func SendNodeStats() {
 	stats := sys.GetStats()
 	b, err := json.Marshal(stats)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 	req, err := http.NewRequest("POST", API, bytes.NewBuffer(b))
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
@@ -26,6 +28,7 @@ func SendNodeStats() {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 	defer resp.Body.Close()

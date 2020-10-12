@@ -18,7 +18,10 @@ func Mem() MemStats {
 	if err != nil {
 		fmt.Println(err)
 	}
-	swap_used_percent := (1 - (float64(memStats.SwapFree)+float64(memStats.SwapCached))/float64(memStats.SwapTotal)) * 100
+	var swap_used_percent float64
+	if memStats.SwapTotal > 0 {
+		swap_used_percent = (1 - (float64(memStats.SwapFree)+float64(memStats.SwapCached))/float64(memStats.SwapTotal)) * 100
+	}
 	stats := MemStats{
 		Total:           memStats.Total,
 		UsedPercent:     memStats.UsedPercent,

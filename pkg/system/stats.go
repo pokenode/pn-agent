@@ -10,9 +10,9 @@ type Stats struct {
 	Docker []DockerStats
 }
 
-func GetStats() Stats {
+func GetStats(mode string) Stats {
 	stats := Stats{
-		CPU:    CPU(),
+		CPU:    CPU(mode),
 		Mem:    Mem(),
 		Disk:   Disk(),
 		Net:    Net(),

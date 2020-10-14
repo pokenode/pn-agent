@@ -6,13 +6,10 @@ import (
 
 func init() {
 	init_env()
+	init_log()
 }
 
 func main() {
-	if MODE == "DEV" {
-		SendNodeStats()
-	}
-
 	// init
 	c := cron.New(cron.WithChain(
 		cron.DelayIfStillRunning(cron.DefaultLogger),
@@ -20,7 +17,7 @@ func main() {
 
 	// define jobs
 	if MODE == "DEV" {
-		c.AddFunc("@every 6s", SendNodeStats)
+		c.AddFunc("@every 1s", SendNodeStats)
 	} else {
 		c.AddFunc("*/5 * * * *", SendNodeStats)
 	}

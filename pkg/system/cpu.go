@@ -14,10 +14,14 @@ type CPUStats struct {
 	Percent   float64 `json:"percent"`
 }
 
-func CPU() CPUStats {
+func CPU(mode string) CPUStats {
 	c, err := cpu.Counts(true)
 	// Calculate percent over 5min
-	p, err := cpu.Percent(300*time.Second, false)
+	var interval int64 = 300
+	if mode == "DEV" {
+		interval = 0
+	}
+	p, err := cpu.Percent(time.Duration(interval)*time.Second, false)
 	cpuInfo, err := cpu.Info()
 	if err != nil {
 		fmt.Println(err)

@@ -16,8 +16,8 @@ type CPUStats struct {
 
 func CPU() CPUStats {
 	c, err := cpu.Counts(true)
-	// Calculate percent over 5s
-	p, err := cpu.Percent(5*time.Second, false)
+	// Calculate percent over 5min
+	p, err := cpu.Percent(300*time.Second, false)
 	cpuInfo, err := cpu.Info()
 	if err != nil {
 		fmt.Println(err)

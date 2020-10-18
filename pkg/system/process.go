@@ -8,8 +8,10 @@ import (
 )
 
 type ProcStats struct {
-	Name    string  `json:"name"`
-	Percent float64 `json:"percent"`
+	Name     string  `json:"name"`
+	Percent  float64 `json:"percent"`
+	Memory   uint64  `json:"memory"`
+	Username string  `json:"username"`
 }
 
 func Proc() []ProcStats {
@@ -22,9 +24,21 @@ func Proc() []ProcStats {
 	for _, p := range procs {
 		name, _ := p.Name()
 		percent, _ := p.CPUPercent()
+		username, _ := p.Username()
+		memInfo, err := p.MemoryInfo()
+		var memory uint64
+		if err != nil {
+			fmt.Println(err)
+			fmt.Println(name)
+			memory = 0
+		} else {
+			memory = memInfo.RSS
+		}
 		stats := ProcStats{
-			Name:    name,
-			Percent: percent,
+			Name:     name,
+			Percent:  percent,
+			Username: username,
+			Memory:   memory,
 		}
 		pList = append(pList, stats)
 	}

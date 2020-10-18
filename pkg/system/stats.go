@@ -3,7 +3,7 @@ package system
 type Stats struct {
 	CPU    CPUStats
 	Mem    MemStats
-	Disk   DiskStats
+	Disk   []DiskStats
 	Net    NetStats
 	Host   HostStats
 	Proc   []ProcStats
@@ -20,5 +20,6 @@ func GetStats(mode string) Stats {
 		Proc:   Proc(),
 		Docker: Docker(),
 	}
+	//PPrint(stats)
 	return stats
 }

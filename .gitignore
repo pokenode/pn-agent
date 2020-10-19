@@ -3,3 +3,4 @@ set_env.sh
 
 # binaries
 pn-agent
+!pn-agent/

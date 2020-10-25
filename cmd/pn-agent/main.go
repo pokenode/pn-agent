@@ -19,7 +19,7 @@ func main() {
 	if MODE == "DEV" {
 		c.AddFunc("@every 1s", SendNodeStats)
 	} else {
-		c.AddFunc("*/5 * * * *", SendNodeStats)
+		c.AddFunc("@every 5m", SendNodeStats)
 	}
 
 	// run

@@ -1,13 +1,12 @@
 #!/bin/bash
 PN_NODEID=$1
-PN_API=https://api.pokenode.com/stats
 PN_PATH=/var/www/pokenode
 PN_AGENT_PATH=/var/www/pokenode/pn-agent
 PN_SYSTEMD_CONFIG_PATH=/etc/systemd/system/pn-agent.service
 
 # Begin message
 echo "============================================="
-echo "Installing pn-agent, it may take few minutes."
+echo "Installing pn-agent, it may take a few minutes."
 echo "============================================="
 
 # Create folder for Pokenode
@@ -35,7 +34,6 @@ if [ $? -ne 0 ] || [ ! -f $PN_SYSTEMD_CONFIG_PATH ]; then
         echo "Fail to download systemd config from GitHub."
         exit
 else
-        sed -i "s/PN_API/$PN_API/g" $PN_SYSTEMD_CONFIG_PATH
         sed -i "s/PN_NODEID/$PN_NODEID/g" $PN_SYSTEMD_CONFIG_PATH
         echo "Download finished."
 fi

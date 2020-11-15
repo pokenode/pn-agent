@@ -1,8 +1,6 @@
 package system
 
 import (
-	"fmt"
-
 	"github.com/shirou/gopsutil/docker"
 )
 
@@ -18,7 +16,8 @@ func Docker() []DockerStats {
 
 	list, err := docker.GetDockerStat()
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
+		return sList
 	}
 	for _, s := range list {
 		stats := DockerStats{

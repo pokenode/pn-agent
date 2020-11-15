@@ -22,6 +22,9 @@ func main() {
 		c.AddFunc("@every 5m", SendNodeStats)
 	}
 
-	// run
+	// run first job
+	SendNodeStats()
+
+	// run jobs
 	c.Run()
 }

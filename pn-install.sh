@@ -1,13 +1,27 @@
 #!/bin/bash
 PN_NODEID=$1
-PN_PATH=/var/www/pokenode
-PN_AGENT_PATH=/var/www/pokenode/pn-agent
+PN_PATH=/etc/pokenode
+PN_AGENT_PATH=/etc/pokenode/pn-agent
 PN_SYSTEMD_CONFIG_PATH=/etc/systemd/system/pn-agent.service
 
 # Begin message
 echo "==================================================="
 echo "| Installing pn-agent, it may take a few minutes. |"
 echo "==================================================="
+
+# Check Root Permission
+if [ $(id -u) != "0" ]; then
+	echo -e "\e[1m\e[31mRoot permission is required to install pn-agent.\e[0m"
+	echo -e "\e[1m\e[31mExit installation.\e[0m"
+	exit
+fi
+
+# Check input nodeid
+if [ $# -lt 1 ]; then
+	echo -e "\e[1m\e[31mUsage: bash $0 'nodeid'.\e[0m"
+	echo -e "\e[1m\e[31mExit installation.\e[0m"
+	exit
+fi
 
 # Check SELINUX
 if command -v selinuxenabled &> /dev/null; then
@@ -25,13 +39,16 @@ if [ $(ps --no-headers -o comm 1) != "systemd" ]; then
 	exit
 fi
 
-# Stop pn-agent if running
-systemctl stop pn-agent
-
-# Create folder for Pokenode
-if [ ! -d $PN_PATH ]; then
-        mkdir -p $PN_PATH
+# Clean previous installation
+if [ -d $PN_PATH ]; then
+	systemctl stop pn-agent
+	rm $PN_SYSTEMD_CONFIG_PATH
+	systemctl daemon-reload
+	rm -rf $PN_PATH
 fi
+
+# Create folder for PokeNode
+mkdir -p $PN_PATH
 
 # Download pn-agent from PokeNode.com
 URL_OF_AGENT=https://pokenode.com/static/pn-agent
@@ -57,10 +74,14 @@ else
         echo "Download finished."
 fi
 
+# Create user for running pn-agent
+useradd pn-agent -r -d /etc/pokenode -s /bin/false
+chown -R pn-agent:pn-agent /etc/pokenode && chmod -R 700 /etc/pokenode
+
 # Setup systemd
 systemctl daemon-reload
 systemctl enable pn-agent
-systemctl start pn-agent
+systemctl restart pn-agent
 
 # End message
 echo "==================================================="

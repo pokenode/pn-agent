@@ -9,7 +9,7 @@ Restart=always
 Environment=MODE=PROD
 Environment=API=https://api.pokenode.com/stats
 Environment=NODEID=PN_NODEID
-ExecStart=/var/www/pokenode/pn-agent
+ExecStart=/etc/pokenode/pn-agent
 
 OOMScoreAdjust=-900
 SyslogIdentifier=PokeNodeAgent

@@ -23,14 +23,6 @@ if [ $# -lt 1 ]; then
 	exit
 fi
 
-# Check SELINUX
-if command -v selinuxenabled &> /dev/null; then
-	selinuxenabled
-	if [ $? -eq 0 ]; then
-		echo -e "\e[1m\e[31mYou may need to disable SELINUX.\e[0m"
-	fi
-fi
-
 # Check SystemD
 if [ $(ps --no-headers -o comm 1) != "systemd" ]; then
 	echo

@@ -69,6 +69,8 @@ fi
 # Create user for running pn-agent
 useradd pn-agent -r -d /etc/pokenode -s /bin/false
 chown -R pn-agent:pn-agent /etc/pokenode && chmod -R 700 /etc/pokenode
+groupadd docker
+usermod -aG docker pn-agent
 
 # Setup systemd
 systemctl daemon-reload

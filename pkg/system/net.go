@@ -3,7 +3,7 @@ package system
 import (
 	"fmt"
 
-	"github.com/shirou/gopsutil/net"
+	"github.com/shirou/gopsutil/v3/net"
 )
 
 type NetStats struct {

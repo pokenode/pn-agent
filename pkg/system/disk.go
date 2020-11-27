@@ -3,7 +3,7 @@ package system
 import (
 	"fmt"
 
-	"github.com/shirou/gopsutil/disk"
+	"github.com/shirou/gopsutil/v3/disk"
 )
 
 type DiskStats struct {
@@ -37,6 +37,7 @@ func Disk() []DiskStats {
 		}
 		sList = append(sList, stats)
 	}
+	PPrint(sList)
 
 	return sList
 }

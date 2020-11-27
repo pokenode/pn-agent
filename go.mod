@@ -5,6 +5,6 @@ go 1.14
 require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/shirou/gopsutil v2.20.9+incompatible
+	github.com/shirou/gopsutil/v3 v3.20.10
 	github.com/sirupsen/logrus v1.7.0
-	golang.org/x/sys v0.0.0-20201007082116-8445cc04cbdf // indirect
 )

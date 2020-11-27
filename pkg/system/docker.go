@@ -1,7 +1,7 @@
 package system
 
 import (
-	"github.com/shirou/gopsutil/docker"
+	"github.com/shirou/gopsutil/v3/docker"
 )
 
 type DockerStats struct {

@@ -3,7 +3,7 @@ package system
 import (
 	"fmt"
 
-	"github.com/shirou/gopsutil/host"
+	"github.com/shirou/gopsutil/v3/host"
 )
 
 type HostStats struct {

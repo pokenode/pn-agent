@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/v3/cpu"
 )
 
 type CPUStats struct {

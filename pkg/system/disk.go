@@ -7,7 +7,8 @@ import (
 )
 
 type DiskStats struct {
-	Path        string  `json:"path"`
+	Device      string  `json:"device"`
+	MountPoint  string  `json:"mount_point"`
 	FSType      string  `json:"fstype"`
 	Total       uint64  `json:"total"`
 	Free        uint64  `json:"free"`
@@ -22,14 +23,24 @@ func Disk() []DiskStats {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	var dList []string
 	for _, p := range pStats {
+		// Check if device exists
+		if ExistInArray(p.Device, dList) {
+			continue
+		} else {
+			dList = append(dList, p.Device)
+		}
+		// Add to stats list
 		dStats, err := disk.Usage(p.Mountpoint)
 		if err != nil {
 			fmt.Println(err)
 		}
 		stats := DiskStats{
-			Path:        dStats.Path,
-			FSType:      dStats.Fstype,
+			Device:      p.Device,
+			MountPoint:  p.Mountpoint,
+			FSType:      p.Fstype,
 			Total:       dStats.Total,
 			Free:        dStats.Free,
 			Used:        dStats.Used,
@@ -37,7 +48,15 @@ func Disk() []DiskStats {
 		}
 		sList = append(sList, stats)
 	}
-	PPrint(sList)
 
 	return sList
+}
+
+func ExistInArray(e string, arr []string) bool {
+	for _, a := range arr {
+		if e == a {
+			return true
+		}
+	}
+	return false
 }

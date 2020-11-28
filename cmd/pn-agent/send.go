@@ -27,19 +27,30 @@ func SendNodeStats() {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Pokenode-Agent-Nodeid", NODEID)
 
+	// Do request
 	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		log.Error("Error occurred.")
-		return
+	var resp *http.Response
+	var retryCount int = 3
+	for retryCount > 0 {
+		resp, err = client.Do(req)
+		if err != nil {
+			fmt.Println(err)
+			log.Error("Error occurred.")
+			retryCount -= 1
+			//fmt.Println("retryCount: ", retryCount)
+		} else {
+			break
+		}
 	}
-	defer resp.Body.Close()
-
-	body, _ := ioutil.ReadAll(resp.Body)
-	if string(body) == "ok" {
-		log.Info("Post ok.")
+	if resp != nil {
+		defer resp.Body.Close()
+		body, _ := ioutil.ReadAll(resp.Body)
+		if string(body) == "ok" {
+			log.Info("Post ok.")
+		} else {
+			log.Info("Error occurred.")
+		}
 	} else {
-		log.Info("Error occurred.")
+		log.Error("Resp is nil.")
 	}
 }

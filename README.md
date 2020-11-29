@@ -2,7 +2,7 @@
 
 [PokeNode](https://pokenode.com) is a online vps monitoring service.
 The pn-agent is a component to be deployed on your vps.
-It sends information of host machine to PokeNode.com.
+It sends information of host machine to https://api.pokenode.com.
 
 ## Requirement
 

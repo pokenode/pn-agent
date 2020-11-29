@@ -5,10 +5,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 
 	sys "pokenode.com/pn-agent/pkg/system"
 )
+
+type MyDialer net.Dialer
+
+func (d *MyDialer) Dial(network, address string) (net.Conn, error) {
+	dd := &net.Dialer{}
+	return dd.Dial("tcp4", address)
+}
 
 func SendNodeStats() {
 	stats := sys.GetStats(MODE)
@@ -28,7 +36,12 @@ func SendNodeStats() {
 	req.Header.Set("Pokenode-Agent-Nodeid", NODEID)
 
 	// Do request
-	client := &http.Client{}
+	d := &MyDialer{}
+	client := &http.Client{
+		Transport: &http.Transport{
+			Dial: d.Dial,
+		},
+	}
 	var resp *http.Response
 	var retryCount int = 3
 	for retryCount > 0 {

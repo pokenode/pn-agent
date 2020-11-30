@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-var MAX_LAT int64 = 3000
-
 type LatStats struct {
 	NA int64 `json:"na"`
 	EU int64 `json:"eu"`
@@ -78,7 +76,7 @@ func HTTPing(address string) int64 {
 	_, err := c.Do(req)
 	if err != nil {
 		fmt.Println(err)
-		return MAX_LAT
+		return 0
 	}
 
 	if t0 == 0 {

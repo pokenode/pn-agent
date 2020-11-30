@@ -8,6 +8,7 @@ type Stats struct {
 	Disk   []DiskStats
 	Proc   []ProcStats
 	Docker []DockerStats
+	Lat    LatStats
 }
 
 func GetStats(mode string) Stats {
@@ -19,6 +20,7 @@ func GetStats(mode string) Stats {
 		Disk:   Disk(),
 		Proc:   Proc(),
 		Docker: Docker(),
+		Lat:    Lat(),
 	}
 	//PPrint(stats)
 	return stats

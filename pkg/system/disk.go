@@ -23,14 +23,12 @@ func Disk() []DiskStats {
 	if err != nil {
 		fmt.Println(err)
 	}
+	//PPrint(pStats)
 
-	var dList []string
 	for _, p := range pStats {
-		// Check if device exists
-		if ExistInArray(p.Device, dList) {
+		// Filter out bind mount
+		if isBindMount(p) {
 			continue
-		} else {
-			dList = append(dList, p.Device)
 		}
 		// Add to stats list
 		dStats, err := disk.Usage(p.Mountpoint)
@@ -49,12 +47,13 @@ func Disk() []DiskStats {
 		sList = append(sList, stats)
 	}
 
+	//PPrint(sList)
 	return sList
 }
 
-func ExistInArray(e string, arr []string) bool {
-	for _, a := range arr {
-		if e == a {
+func isBindMount(p disk.PartitionStat) bool {
+	for _, o := range p.Opts {
+		if o == "bind" {
 			return true
 		}
 	}
